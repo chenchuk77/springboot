@@ -30,7 +30,7 @@ public class TopicController {
 		return topicService.getTopics();
 	}
 	
-	@RequestMapping("/topic/{id}")
+	@RequestMapping("/topics/{id}")
 	public Topic getTopic(@PathVariable String id) {
 		return topicService.getTopic(id);
 	}
@@ -42,11 +42,13 @@ public class TopicController {
 	
 	@RequestMapping(method=RequestMethod.PUT, value= "/topics/{id}")
 	public Topic updateTopic(@RequestBody Topic topic, @PathVariable String id) {
-		
-        logger.warn("updateTopic called with id: " + id + ".");
-//        logger.warn(t.toString());
+		logger.warn("updateTopic called with id: " + id + ".");
+        return topicService.updateTopic(topic, id);
+	}
 
-        
-		return topicService.updateTopic(topic, id);
+	@RequestMapping(method=RequestMethod.DELETE, value= "/topics/{id}")
+	public void deleteTopic(@PathVariable String id) {
+		logger.warn("deleteTopic called with id: " + id + ".");
+        topicService.deleteTopic(id);
 	}
 }
