@@ -2,22 +2,22 @@ package io.net.kukinet.springbootstarter.topics;
 
 public class Topic {
 
-	private int id;
+	private String id;
 	private String name;
 	private String description;
 	
 	
 	// constructors
 	public Topic() {}
-	public Topic(int id, String name, String description) {
+	public Topic(String id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
 	
 	// setters/getters
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public String getId() {return id;}
+	public void setId(String id) {this.id = id;}
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	public String getDescription() {return description;}

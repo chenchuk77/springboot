@@ -14,14 +14,22 @@ public class TopicService {
 
 	public TopicService() {
 		topics = new ArrayList<>();
-		topics.add(new Topic(1, "Spring", "Spring FW description"));
-		topics.add(new Topic(2, "Java", "Java description"));
-		topics.add(new Topic(3, "Ruby", "maybe better"));
+		topics.add(new Topic("1", "Spring", "Spring FW description"));
+		topics.add(new Topic("2", "Java", "Java description"));
+		topics.add(new Topic("3", "Ruby", "maybe better"));
 	}
 	
 	
 	public List getTopics() {
 		return topics;
+	}
+
+
+	public Topic getTopic(String id) {
+		return topics.stream()
+				.filter(topic -> topic.getId().equals(id))
+				.findFirst()
+				.get();
 	}
 
 
