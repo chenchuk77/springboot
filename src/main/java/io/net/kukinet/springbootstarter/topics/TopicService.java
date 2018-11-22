@@ -33,4 +33,11 @@ public class TopicService {
 	}
 
 
+	public Topic addTopic(Topic topic) {
+		topics.add(topic);
+		return getTopic(topic.getId());
+		
+	}
+
+
 }
