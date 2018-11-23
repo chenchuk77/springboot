@@ -1,7 +1,14 @@
 package io.net.kukinet.springbootstarter.topics;
 
-public class Topic {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Topic {
+	// class is entity (db row), @Id is the primary-key
+	
+
+	@Id
 	private String id;
 	private String name;
 	private String description;

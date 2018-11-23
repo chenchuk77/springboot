@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.net.kukinet.springbootstarter.logger.LoggingController;
@@ -15,6 +16,9 @@ public class TopicService {
 	
     Logger logger = LoggerFactory.getLogger(TopicService.class);
 
+    @Autowired
+    private TopicRepository repository;
+    
 	private List<Topic> topics;
 
 	public TopicService() {
@@ -26,41 +30,46 @@ public class TopicService {
 	
 	
 	public List getTopics() {
+		// return topics;
+		List<Topic> topics = new ArrayList<>();
+		repository.findAll().forEach(t -> topics.add(t));
 		return topics;
 	}
 
 
 	public Topic getTopic(String id) {
-		return topics.stream()
-				.filter(topic -> topic.getId().equals(id))
-				.findFirst()
-				.get();
+		return repository.findById(id).get();
 	}
 
 
 	public Topic addTopic(Topic topic) {
-		topics.add(topic);
-		return getTopic(topic.getId());
-		
+		repository.save(topic);
+		return topic;
 	}
 
 
 	public Topic updateTopic(Topic topic, String id) {
-		Topic t = getTopic(id);
-		System.out.println("hello");
-        logger.warn("going to update " + id + ".");
-        logger.warn(t.toString());
-		t.setId(topic.getId());
-		t.setName(topic.getName());
-		t.setDescription(topic.getDescription());
-		return t;
+		repository.save(topic);
+		return topic;
+
+		
+		//		Topic t = getTopic(id);
+//		System.out.println("hello");
+//        logger.warn("going to update " + id + ".");
+//        logger.warn(t.toString());
+//		t.setId(topic.getId());
+//		t.setName(topic.getName());
+//		t.setDescription(topic.getDescription());
+//		return t;
 	}
 
 
 	public void deleteTopic(String id) {
 		//Topic t = getTopic(id);
 		//topics.remove(t);
-		topics.removeIf(t -> t.getId().equals(id));
+		//topics.removeIf(t -> t.getId().equals(id));
+		
+		repository.deleteById(id);
 	}
 
 
